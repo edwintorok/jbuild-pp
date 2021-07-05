@@ -19,8 +19,8 @@ let rec pp fmt = function
   | `Atom s   -> Format.pp_print_string fmt s
   | `List []  -> Format.pp_print_string fmt "()"
   | `List [x] -> Format.fprintf fmt "@[<hov2>(%a)@]" pp x
-  | `List (`Atom ("libraries") :: _ as l)
-  | `List (`Atom _ :: `List _ :: _ as l) ->
+  | `List (`Atom ("libraries"|"deps") :: _ as l)
+  | `List (`Atom _ :: `List _ :: _ :: _ as l) ->
     Format.fprintf fmt "@[<v2>(";
     pp' fmt l;
     Format.fprintf fmt "@]@,)"
